@@ -1,0 +1,31 @@
+{
+  "name": "geraldo_bahia-microsseguro",
+  "version": "1.0.0",
+  "description": "api do sistema de microseguro do geraldo da bahia",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon --exec babel-node index.js",
+    "debug": "nodemon --exec babel-node index.js --inspect",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://joeverson@bitbucket.org/dupdevelop/geraldo-bahia-microsseguro.git"
+  },
+  "keywords": [
+    "microsseguro"
+  ],
+  "author": "joerverson santos",
+  "license": "ISC",
+  "homepage": "https://bitbucket.org/dupdevelop/geraldo-bahia-microsseguro#readme",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-plugin-dynamic-import-node": "^2.0.0",
+    "babel-preset-env": "^1.7.0"
+  },
+  "dependencies": {
+    "cors": "^2.8.4",
+    "express": "^4.16.3",
+    "lodash": "^4.17.10"
+  }
+}
