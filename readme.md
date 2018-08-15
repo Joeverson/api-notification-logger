@@ -13,3 +13,11 @@ a base de funcionamento da api, são elas:
 - model (Exp. User) - nome do modulo começando com letra maiuscula
 - Route - arquivos de rotas que conterá todos os caminhos para esse modulo
 - Middlewares - arquivo que é responsavel por execultar alguma coisa antes de executar o conteudo da rota.
+
+# ferramentas 
+
+- Trello
+- Bitbucket
+
+modulo para o trello se converter em scrum
+https://chrome.google.com/webstore/detail/scrum-for-trello/jdbcdblgjdpmfninkoogcfpnkjmndgje?hl=en
