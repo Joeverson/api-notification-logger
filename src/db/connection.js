@@ -1,6 +1,5 @@
 import Sequelize from 'sequelize'
 import env from 'dotenv'
-import _ from 'lodash'
 import {
   URI_DB_MODELS
 } from '../utils/constants'

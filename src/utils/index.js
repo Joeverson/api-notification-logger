@@ -1,5 +1,10 @@
 import bcrypt from 'bcryptjs'
 
-export function cryptPass (pass) {
-  return bcrypt.hashSync(pass, 8)
+export const password = {
+  generate (pass) {
+    return bcrypt.hashSync(pass, 8)
+  },
+  check (pass, dbPass) {
+    return bcrypt.compareSync(pass, dbPass)
+  }
 }

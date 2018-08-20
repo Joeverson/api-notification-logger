@@ -1,19 +1,29 @@
 import dbConnection from '../../db/connection'
-import { cryptPass } from '../../utils'
+import { password } from '../../utils'
 import userValidations from './Validations'
+import jwt from 'jsonwebtoken'
 
 export default {
   async autenticate (data) {
-    const db = await dbConnection
+    try {
+      /**
+       * essa validaçaõ valida e retorna caso tenha um usuario
+       */
+      const user = await userValidations.exists(data)
 
-    const user = await db.User.findOne({
-      where: {
-        email: data.email,
-        password: cryptPass(data.password)
+      const token = jwt.sign({
+        id: user.id
+      }, process.env.SECRET_KEY, {
+        expiresIn: 86400 // expires in 24 hours
+      })
+
+      return {
+        token,
+        user
       }
-    })
-
-    return user
+    } catch (err) {
+      return err
+    }
   },
 
   /**
@@ -26,6 +36,9 @@ export default {
     try {
       // validations here
       userValidations.isRequired(data)
+
+      // criptografando a senha
+      data.password = password.generate(data.password)
 
       // insert
       const [err, user] = await db.User.create(data)
