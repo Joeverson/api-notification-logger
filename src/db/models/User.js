@@ -3,6 +3,7 @@ export default (sequelize, DataTypes) => {
     id: {
       type: DataTypes.INTEGER,
       allowNull: false,
+      autoIncrement: true,
       primaryKey: true
     },
     name: {
@@ -35,7 +36,9 @@ export default (sequelize, DataTypes) => {
   })
 
   User.associate = model => {
-
+    User.belongsTo(model.User_types, {
+      foreignKey: 'id'
+    })
   }
 
   return User

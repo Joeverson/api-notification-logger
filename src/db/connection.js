@@ -1,5 +1,6 @@
 import Sequelize from 'sequelize'
 import env from 'dotenv'
+import _ from 'lodash'
 import {
   URI_DB_MODELS
 } from '../utils/constants'
@@ -30,7 +31,10 @@ const db = {
    * processamento dos modelos e associações
    */
   async statement () {
-    const schemaDB = {}
+    const schemaDB = {
+      User: {},
+      User_types: {}
+    }
 
     /**
      * varrendo todos os arquivos de modelos
@@ -61,6 +65,8 @@ const db = {
       }
     })
 
+    schemaDB.sequelize = this.instance
+
     return schemaDB
   },
   /**
@@ -71,12 +77,19 @@ const db = {
     return this
   },
   /**
-   * run db
+   * load novos models
    */
   load () {
     this.instance.sync()
     return this
+  },
+  /**
+   * zera tudo e cria novamente
+   */
+  loadForce () {
+    this.instance.sync({force: true})
+    return this
   }
 }
 
-export default db.load().statement()
+export default db.loadForce().statement()

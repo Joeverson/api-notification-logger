@@ -1,6 +1,5 @@
-import db from '../db/connection'
+// import statement from '../db/connection'
 
 export default async (req, res, next) => {
-  console.log(await db.User)
   next()
 }
