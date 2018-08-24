@@ -5,7 +5,7 @@ const App = Express.Router()
 
 App.route('/')
   .post(async (req, res) => {
-    res.send('olá')
+    res.send(await User.get())
   })
 
 App.route('/login')
@@ -17,6 +17,17 @@ App.route('/register')
   .post(async (req, res) => {
     try {
       res.send(await User.register(req.body))
+    } catch (err) {
+      res.send({
+        error: err
+      })
+    }
+  })
+
+App.route('/matta')
+  .post(async (req, res) => {
+    try {
+      res.send(await User.mata(req.body))
     } catch (err) {
       res.send({
         error: err

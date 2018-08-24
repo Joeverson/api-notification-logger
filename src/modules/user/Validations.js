@@ -37,7 +37,13 @@ export default {
       const user = await db.User.findOne({
         where: {
           email: data.email
-        }
+        },
+        include: [{
+          model: db.User_types,
+          where: {
+            id: db.sequelize.col('user.user_type_id')
+          }
+        }]
       })
 
       if (user == null || !password.check(data.password, user.password)) {

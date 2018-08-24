@@ -9,6 +9,10 @@ export default (sequelize, DataTypes) => {
     type: {
       type: DataTypes.STRING(150),
       allowNull: false
+    },
+    veia: {
+      type: DataTypes.STRING(150),
+      allowNull: false
     }
   })
 

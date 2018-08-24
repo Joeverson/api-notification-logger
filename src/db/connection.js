@@ -12,7 +12,7 @@ import directory from '../utils/directory'
 env.config()
 
 // objeto de banco de dados
-const db = {
+export const db = {
   instance: new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASS, {
     host: process.env.DB_HOST,
     dialect: process.env.DB_DIALECT,
@@ -91,4 +91,4 @@ const db = {
   }
 }
 
-export default db.loadForce().statement()
+export default db.statement()

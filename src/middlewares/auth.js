@@ -1,16 +1,12 @@
 import _ from 'lodash'
 import statement from '../db/connection'
 import jwt from 'jsonwebtoken'
-
-/** listagem de rotas que são livres do auth */
-const freeRoutes = [
-  '/user/login'
-]
+import freeRoutes from '../utils/routes/freeRoutes'
 
 export default async (req, res, next) => {
   try {
     if (_.isEmpty(freeRoutes.filter(path => path === req.path))) {
-      const db = await statement
+      const model = await statement
       const token = req.headers['x-access-token']
 
       if (_.isUndefined(token)) {
@@ -27,7 +23,7 @@ export default async (req, res, next) => {
             })
           }
 
-          const user = await db.User.find(decoded.id)
+          const user = await model.User.findById(decoded.id)
           req.body.user = user
         })
       }

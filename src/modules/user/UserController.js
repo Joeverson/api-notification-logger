@@ -31,7 +31,7 @@ export default {
    * usuarios no sistema
    */
   async register (data) {
-    const db = await dbConnection
+    const model = await dbConnection
 
     try {
       // validations here
@@ -41,7 +41,7 @@ export default {
       data.password = password.generate(data.password)
 
       // insert
-      const [err, user] = await db.User.create(data)
+      const [err, user] = await model.User.create(data)
 
       return {
         err,
@@ -50,5 +50,13 @@ export default {
     } catch (err) {
       throw err
     }
+  },
+
+  async get () {
+    const model = await dbConnection
+
+    const res = await model.User.findAll()
+
+    return res
   }
 }
