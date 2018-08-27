@@ -37,7 +37,7 @@ export default (sequelize, DataTypes) => {
 
   User.associate = model => {
     User.belongsTo(model.User_types, {
-      foreignKey: 'id'
+      foreignKey: 'user_type_id'
     })
   }
 

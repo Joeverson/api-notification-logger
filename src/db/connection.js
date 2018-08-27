@@ -4,6 +4,7 @@ import {
   URI_DB_MODELS
 } from '../utils/constants'
 import directory from '../utils/directory'
+
 /**
  * pegando as informações do arquivo .env
  * e as registrando
@@ -17,6 +18,9 @@ export const db = {
     host: process.env.DB_HOST,
     dialect: process.env.DB_DIALECT,
     port: process.env.DB_PORT,
+    define: {
+      timestamps: false // true by default
+    },
     pool: {
       max: 6,
       min: 0,

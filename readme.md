@@ -21,3 +21,5 @@ a base de funcionamento da api, são elas:
 
 modulo para o trello se converter em scrum
 https://chrome.google.com/webstore/detail/scrum-for-trello/jdbcdblgjdpmfninkoogcfpnkjmndgje?hl=en
+
+acl = https://www.npmjs.com/package/express-acl

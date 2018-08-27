@@ -1,10 +1,16 @@
 [{
     "group": "guest",
     "permissions": [{
-      "resource": "user/login",
-      "methods": ["POST"],
-      "action": "allow"
-    }]
+        "resource": "user/login",
+        "methods": ["POST"],
+        "action": "allow"
+      },
+      {
+        "resource": "user/register",
+        "methods": ["POST"],
+        "action": "allow"
+      }
+    ]
   },
   {
     "group": "user",

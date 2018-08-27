@@ -16,7 +16,11 @@ App.route('/login')
 App.route('/register')
   .post(async (req, res) => {
     try {
-      res.send(await User.register(req.body))
+      const user = await User.register(req.body)
+
+      res.send({
+        data: user
+      })
     } catch (err) {
       res.send({
         error: err

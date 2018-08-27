@@ -41,12 +41,8 @@ export default {
       data.password = password.generate(data.password)
 
       // insert
-      const [err, user] = await model.User.create(data)
-
-      return {
-        err,
-        user
-      }
+      const user = await model.User.create(data)
+      return user
     } catch (err) {
       throw err
     }
