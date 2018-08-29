@@ -10,6 +10,8 @@ App.route('/')
 
 App.route('/login')
   .post(async (req, res) => {
+    console.log(req.body, req.query);
+    
     res.send(await User.autenticate(req.body))
   })
 
