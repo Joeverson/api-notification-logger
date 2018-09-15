@@ -1,5 +1,6 @@
 import Express from 'express'
 import User from './UserController'
+import Context from '../../utils/context'
 
 const App = Express.Router()
 
@@ -10,34 +11,36 @@ App.route('/')
 
 App.route('/login')
   .post(async (req, res) => {
-    console.log(req.body, req.query);
+    const context = new Context()
+
+    try {
+      const userToken = await User.autenticate(req.body)
+
+      context.data = userToken
+      context.status.success = true 
+    } catch (err) {
+      context.status.success = false
+      context.status.details = err
+    } finally {
+      res.send(context)
+    }
     
-    res.send(await User.autenticate(req.body))
   })
 
 App.route('/register')
   .post(async (req, res) => {
+    const context = new Context()
+
     try {
       const user = await User.register(req.body)
 
-      res.send({
-        data: user
-      })
+      context.data = user
+      context.status.success = true      
     } catch (err) {
-      res.send({
-        error: err
-      })
-    }
-  })
-
-App.route('/matta')
-  .post(async (req, res) => {
-    try {
-      res.send(await User.mata(req.body))
-    } catch (err) {
-      res.send({
-        error: err
-      })
+      context.status.success = false
+      context.status.details = err
+    } finally {
+      res.send(context)
     }
   })
 

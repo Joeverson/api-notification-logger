@@ -12,7 +12,9 @@ const ERRORS = {
   EMAIL_NOT_FOUND: 'NÃO FOI INFORMADO O EMAIL DO USUÁRIO',
   PASSWORD_NOT_FOUND: 'NÃO FOI INFORMADO A SENHA DO USUÁRIO',
 
-  USER_NOT_FOUND: 'USUÁRIO NÃO FOI ENCONTRADO'
+  USER_NOT_FOUND: 'USUÁRIO NÃO FOI ENCONTRADO',
+  
+  EMAIL_ALREADY_EXISTS: 'ESTE EMAIL JÁ FOI CADASTRADO'
 }
 
 export default {
@@ -56,5 +58,25 @@ export default {
     } catch (err) {
       throw err
     }
+  },
+  /**
+   * Método responsavel por verificar se um email eiste no banco de dados
+   * 
+   * @param {String} email
+   */
+  async notExistsEmail (email) {
+    const db = await dbConnection
+
+    const user = await db.User.findOne({
+      where: {
+        email
+      }     
+    })
+    
+    if (!_.isNull(user)) {
+      throw new ValidationException({
+        message: ERRORS.EMAIL_ALREADY_EXISTS
+      })
+    }      
   }
 }

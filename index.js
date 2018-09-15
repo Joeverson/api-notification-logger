@@ -14,12 +14,13 @@ const Server = Http.Server(app)
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
-app.use(cors)
+// app.use(cors)
 /**
  *
  * runner the core (routes modules, middlewares modules)
  *
  */
+
 
 core.loadResources(app)
 

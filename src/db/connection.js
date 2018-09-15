@@ -96,3 +96,5 @@ export const db = {
 }
 
 export default db.statement()
+
+export const mountDB = db.loadForce().statement()

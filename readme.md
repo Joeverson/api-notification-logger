@@ -23,3 +23,20 @@ modulo para o trello se converter em scrum
 https://chrome.google.com/webstore/detail/scrum-for-trello/jdbcdblgjdpmfninkoogcfpnkjmndgje?hl=en
 
 acl = https://www.npmjs.com/package/express-acl
+
+# Migrações
+
+Para poder fazer a migração de dados(subir a base de dados) basta dar oo seguinte 
+comando ``` npm run migrations ``` com isso ele irá subir a base de dados.
+
+# Routes
+
+abaixo esta listado as rotas, seus paramêtros e o qeu fazem.
+
+## user
+
+**[GET]** /user - pega a listagem de todos usuários.
+
+**[POST]** /user/login [*string* **email**, *string* **password**] - faz o login do usuário no sistema. 
+
+**[POST]** /user/register [*string* **email**, *string* **nome**, *string* **password**, *int* **type_user_id**] - Adiciona um novo usuário na base. 

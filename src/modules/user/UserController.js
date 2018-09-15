@@ -10,9 +10,10 @@ export default {
        * essa validaçaõ valida e retorna caso tenha um usuario
        */
       const user = await userValidations.exists(data)
-
+      
       const token = jwt.sign({
-        id: user.id
+        id: user.id,
+        role: user.user_type.name
       }, process.env.SECRET_KEY, {
         expiresIn: 86400 // expires in 24 hours
       })
@@ -36,6 +37,7 @@ export default {
     try {
       // validations here
       userValidations.isRequired(data)
+      await userValidations.notExistsEmail(data.email)
 
       // criptografando a senha
       data.password = password.generate(data.password)
