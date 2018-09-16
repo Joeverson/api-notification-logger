@@ -33,10 +33,14 @@ comando ``` npm run migrations ``` com isso ele irá subir a base de dados.
 
 abaixo esta listado as rotas, seus paramêtros e o qeu fazem.
 
-## user
+## usuario
 
-**[GET]** /user - pega a listagem de todos usuários.
+**[GET]** /usuario - pega a listagem de todos usuários.
 
-**[POST]** /user/login [*string* **email**, *string* **password**] - faz o login do usuário no sistema. 
+**[DELETE]** /usuario/:id - deleta um usuario pelo id.
 
-**[POST]** /user/register [*string* **email**, *string* **nome**, *string* **password**, *int* **type_user_id**] - Adiciona um novo usuário na base. 
+**[PUT]** /usuario/:id [*object* **data**]- atualiza um usuario pelo id .
+
+**[POST]** /usuario/login [*string* **email**, *string* **password**] - faz o login do usuário no sistema. 
+
+**[POST]** /usuario/register [*string* **email**, *string* **nome**, *string* **password**, *int* **type_user_id**] - Adiciona um novo usuário na base. 
