@@ -7,7 +7,8 @@
     "dev": "nodemon --exec babel-node index.js",
     "migrations": "babel-node src/db/migrations/init.js ",
     "debug": "nodemon --exec babel-node index.js --inspect",
-    "test": "mocha --compilers js:babel-core/register test/init.js"
+    "test": "mocha --compilers js:babel-core/register test/init.js",
+    "db": "sequelize-auto -o \"./src/db/models\" -d microcredito -h localhost -u root -p 3306 -x dragonshit775{} -e mysql"
   },
   "repository": {
     "type": "git",
@@ -24,7 +25,8 @@
     "babel-core": "^6.26.3",
     "babel-plugin-dynamic-import-node": "^2.0.0",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
-    "babel-preset-env": "^1.7.0"
+    "babel-preset-env": "^1.7.0",
+    "sequelize-auto": "^0.4.29"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
@@ -36,6 +38,7 @@
     "express-acl": "^2.0.3",
     "jsonwebtoken": "^8.3.0",
     "lodash": "^4.17.10",
+    "mysql": "^2.16.0",
     "mysql2": "^1.6.1",
     "sequelize": "^4.38.0"
   }

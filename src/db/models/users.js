@@ -1,10 +1,12 @@
-export default (sequelize, DataTypes) => {
-  const User = sequelize.define('user', {
+/* jshint indent: 2 */
+
+module.exports = function(sequelize, DataTypes) {
+  return sequelize.define('users', {
     id: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.INTEGER(11),
       allowNull: false,
-      autoIncrement: true,
-      primaryKey: true
+      primaryKey: true,
+      autoIncrement: true
     },
     name: {
       type: DataTypes.STRING(150),
@@ -15,7 +17,7 @@ export default (sequelize, DataTypes) => {
       allowNull: false
     },
     password: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING(255),
       allowNull: false
     },
     birth_date: {
@@ -23,23 +25,18 @@ export default (sequelize, DataTypes) => {
       allowNull: true
     },
     photo: {
-      type: DataTypes.BLOB,
+      type: "BLOB",
       allowNull: true
     },
     user_type_id: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.INTEGER(11),
+      allowNull: true,
       references: {
         model: 'user_types',
         key: 'id'
       }
     }
-  })
-
-  User.associate = model => {
-    User.belongsTo(model.User_types, {
-      foreignKey: 'user_type_id'
-    })
-  }
-
-  return User
-}
+  }, {
+    tableName: 'users'
+  });
+};

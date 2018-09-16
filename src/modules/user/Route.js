@@ -5,7 +5,7 @@ import Context from '../../utils/context'
 const App = Express.Router()
 
 App.route('/')
-  .post(async (req, res) => {
+  .get(async (req, res) => {    
     res.send(await User.get())
   })
 
