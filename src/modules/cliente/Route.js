@@ -5,20 +5,6 @@ import Context from '../../utils/context'
 const App = Express.Router()
 
 App.route('/')
-  .post(async (req, res) => {    
-    const context = new Context()
-    
-    try{
-      const cliente = await Cliente.adicionar(req.body)
-      context.data = cliente
-      context.status.success = true
-    } catch (err) {
-      context.status.details = err
-      context.status.success = false
-    } finally {
-      res.send(context)
-    }
-  })
   .get(async (req, res) => {    
     const context = new Context()
     
@@ -33,13 +19,33 @@ App.route('/')
       res.send(context)
     }
   })
+  .post(async (req, res) => {    
+    const context = new Context()
+    
+    try{      
+      const cliente = await Cliente.add(req.body)
+      context.data = cliente
+      context.status.success = true
+    } catch (err) {
+      context.status.details = err
+      context.status.success = false
+    } finally {
+      res.send(context)
+    }
+  })
+  
+
+App.route('/:id')
   .put(async (req, res) => {    
     const context = new Context()
     
     try{
-
-    } catch (err) {
-
+      const cliente = await Cliente.update(req.params.id, req.body)
+      context.data = cliente
+      context.status.success = true
+    } catch (err) {      
+      context.status.details = err
+      context.status.success = false
     } finally {
       res.send(context)
     }
@@ -47,10 +53,13 @@ App.route('/')
   .delete(async (req, res) => {    
     const context = new Context()
     
-    try{
-
+    try {
+      const cliente = await Cliente.delete(req.params.id)
+      context.data = cliente
+      context.status.success = true
     } catch (err) {
-
+      context.status.details = err
+      context.status.success = false
     } finally {
       res.send(context)
     }

@@ -1,15 +1,17 @@
 import dbConnection from '../../db/connection'
-import { password } from '../../utils'
+import {
+  password
+} from '../../utils'
 import userValidations from './Validations'
 import jwt from 'jsonwebtoken'
 
 export default {
-  async autenticate (data) {
+  async autenticate(data) {
     /**
      * essa validaçaõ valida e retorna caso tenha um usuario
      */
     const user = await userValidations.exists(data)
-    
+
     const token = jwt.sign({
       id: user.id,
       role: user.tipo_user.name
@@ -27,7 +29,7 @@ export default {
    * metodo responsavel por regitrar novos
    * usuarios no sistema
    */
-  async register (data) {
+  async register(data) {
     const model = await dbConnection
 
     // validations here
@@ -38,15 +40,56 @@ export default {
     data.senha = password.generate(data.senha)
 
     // insert
-    const user = await model.Usuario.create(data)
-    return user    
+    const usuario = await model.Usuario.create(data)
+    return usuario
   },
 
-  async get () {
+  async list() {
     const model = await dbConnection
 
-    const res = await model.Usuario.findAll()
+    const usuario = await model.Usuario.findAll()
 
-    return res
+    return usuario
+  },
+
+  /**
+   * Metodo responsavel por atualizar os dados do 
+   * cliente
+   * @param {int} id
+   * @param {Object} data
+   */
+  async update(id, data) {
+    const models = await dbConnection
+
+    const usuario = await models.Usuario.update(
+      data, {
+        returning: true,
+        where: {
+          id
+        }
+      }
+    )
+
+    // retornar dados inseridos
+    return usuario
+  },
+  /**
+   * Metodo responsavel para poder 
+   * deletar um cliente pelo id
+   * 
+   * @param {int} id 
+   */
+  async delete(id) {
+    const models = await dbConnection
+
+    const usuario = await models.Usuario.destroy({
+      returning: true,
+      where: {
+        id
+      }
+    })
+
+    // retornar dados inseridos
+    return usuario
   }
 }

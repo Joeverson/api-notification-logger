@@ -44,4 +44,34 @@ App.route('/register')
     }
   })
 
+App.route('/:id')
+  .put(async (req, res) => {
+    const context = new Context()
+
+    try {
+      const usuario = await Usuario.update(req.params.id, req.body)
+      context.data = usuario
+      context.status.success = true
+    } catch (err) {
+      context.status.details = err
+      context.status.success = false
+    } finally {
+      res.send(context)
+    }
+  })
+  .delete(async (req, res) => {
+    const context = new Context()
+
+    try {
+      const usuario = await Usuario.delete(req.params.id)
+      context.data = usuario
+      context.status.success = true
+    } catch (err) {
+      context.status.details = err
+      context.status.success = false
+    } finally {
+      res.send(context)
+    }
+  })
+
 export default App

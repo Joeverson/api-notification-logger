@@ -17,7 +17,7 @@ const ERRORS = {
 
   USER_NOT_FOUND: 'USUÁRIO NÃO FOI ENCONTRADO',
 
-  EMAIL_ALREADY_EXISTS: 'ESTE EMAIL JÁ FOI CADASTRADO'
+  EMAIL_ALREADY_EXISTS: 'ESTE EMAIL JÁ FOI CADASTRADO',
 }
 
 export default {
@@ -46,24 +46,18 @@ export default {
     }
   },
 
-  /** validando se o usuario existe no sistema */
-  async exists(data) {
+  /**
+   * verificando se existe um cliente por id
+   * 
+   * @param {int} id 
+   */
+  async exists(id) {
     const db = await dbConnection
 
     try {
-      const user = await db.Usuario.findOne({
-        where: {
-          email: data.email
-        },
-        include: [{
-          model: db.Tipo_user,
-          where: {
-            id: db.sequelize.col('usuario.tipo_user_id')
-          }
-        }]
-      })
+      const user = await db.Usuario.findById(id)
 
-      if (user == null || !password.check(data.senha, user.senha)) {
+      if (user == null) {
         throw new ValidationException({
           message: ERRORS.USER_NOT_FOUND
         })
@@ -72,26 +66,6 @@ export default {
       return user
     } catch (err) {
       throw err
-    }
-  },
-  /**
-   * Método responsavel por verificar se um email eiste no banco de dados
-   * 
-   * @param {String} email
-   */
-  async notExistsEmail(email) {
-    const db = await dbConnection
-
-    const user = await db.Usuario.findOne({
-      where: {
-        email
-      }
-    })
-
-    if (!_.isNull(user)) {
-      throw new ValidationException({
-        message: ERRORS.EMAIL_ALREADY_EXISTS
-      })
     }
   }
 }
