@@ -23,7 +23,7 @@ export default async (req, res, next) => {
             })
           }
 
-          const user = await model.User.findById(decoded.id)
+          const user = await model.Usuario.findById(decoded.id)
           user.role = decoded.role
           req.decoded = user
         })

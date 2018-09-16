@@ -55,7 +55,7 @@ export const db = {
      */
 
     files.forEach(file => {
-      schemaDB[file.split('.')[0]] = (this.instance.import(`${__dirname}/models/${file}`))
+      schemaDB[file.split('.')[0].replace(/^\w/, c => c.toUpperCase())] = (this.instance.import(`${__dirname}/models/${file}`))
     })
 
     /**

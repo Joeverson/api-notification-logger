@@ -1,32 +1,36 @@
 /* jshint indent: 2 */
 
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('proposta', {
+  const Proposta = sequelize.define('proposta', {
     id: {
       type: DataTypes.INTEGER(11),
       allowNull: false,
       primaryKey: true,
       autoIncrement: true
     },
-    id_user: {
-      type: DataTypes.INTEGER(11),
-      allowNull: true
-    },
     id_cliente: {
       type: DataTypes.INTEGER(11),
-      allowNull: true
+      allowNull: true,
+      references: {
+        model: 'cliente',
+        key: 'id'
+      }
     },
-    id_agencia: {
+    receptor_lse_id: {
       type: DataTypes.INTEGER(11),
-      allowNull: true
+      allowNull: true,
+      references: {
+        model: 'receptor_lse',
+        key: 'id'
+      }
     },
-    id_receptor_lse: {
+    status_id: {
       type: DataTypes.INTEGER(11),
-      allowNull: true
-    },
-    id_status: {
-      type: DataTypes.INTEGER(11),
-      allowNull: true
+      allowNull: true,
+      references: {
+        model: 'status',
+        key: 'id'
+      }
     },
     data_captacao: {
       type: DataTypes.DATEONLY,
@@ -55,4 +59,20 @@ module.exports = function(sequelize, DataTypes) {
   }, {
     tableName: 'proposta'
   });
+
+  Proposta.associate = models => {
+    Proposta.belongsTo(models.Cliente, {
+      foreignKey: 'cliente_id'
+    })
+
+    Proposta.belongsTo(models.Receptor_lse, {
+      foreignKey: 'receptor_lse_id'
+    })
+
+    Proposta.belongsTo(models.Status, {
+      foreignKey: 'Status_id'
+    })
+  }
+
+  return Proposta
 };

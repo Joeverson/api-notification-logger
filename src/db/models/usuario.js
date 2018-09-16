@@ -1,7 +1,7 @@
 /* jshint indent: 2 */
 
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('usuario', {
+  const Usuario = sequelize.define('usuario', {
     id: {
       type: DataTypes.INTEGER(11),
       allowNull: false,
@@ -28,9 +28,13 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.DATEONLY,
       allowNull: true
     },
-    id_tipo_user: {
+    tipo_user_id: {
       type: DataTypes.INTEGER(11),
-      allowNull: true
+      allowNull: true,
+      references: {
+        model: 'Tipo_user',
+        key: 'id'
+      }
     },
     foto: {
       type: DataTypes.TEXT,
@@ -39,8 +43,28 @@ module.exports = function(sequelize, DataTypes) {
     id_status: {
       type: DataTypes.INTEGER(11),
       allowNull: true
+    },
+    superior_id: {
+      type: DataTypes.INTEGER(11),
+      allowNull: true,
+      references: {
+        model: 'Usuario',
+        key: 'id'
+      }
     }
   }, {
     tableName: 'usuario'
   });
+
+  Usuario.associate = models => {
+    Usuario.belongsTo(models.Usuario, {
+      foreignKey: 'superior_id'
+    })
+
+    Usuario.belongsTo(models.Tipo_user, {
+      foreignKey: 'tipo_user_id'
+    })
+  }
+
+  return Usuario
 };

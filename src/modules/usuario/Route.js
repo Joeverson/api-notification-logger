@@ -1,5 +1,5 @@
 import Express from 'express'
-import User from './UserController'
+import User from './UsuarioController'
 import Context from '../../utils/context'
 
 const App = Express.Router()

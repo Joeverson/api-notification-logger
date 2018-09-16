@@ -7,6 +7,6 @@
  */
 
 export default [
-  '/user/login',
-  '/user/register'
+  '/usuario/login',
+  '/usuario/register'
 ]

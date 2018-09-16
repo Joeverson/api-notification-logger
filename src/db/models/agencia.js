@@ -1,7 +1,7 @@
 /* jshint indent: 2 */
 
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('agencia', {
+  const Agencia = sequelize.define('agencia', {
     id: {
       type: DataTypes.INTEGER(11),
       allowNull: false,
@@ -20,15 +20,35 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING(45),
       allowNull: true
     },
-    id_regional: {
+    regional_id: {
       type: DataTypes.INTEGER(11),
-      allowNull: true
+      allowNull: true,
+      references: {
+        model: 'regional',
+        key: 'id'
+      }
     },
-    id_supervisao: {
-      type: DataTypes.STRING(45),
-      allowNull: true
+    supervisao_id: {
+      type: DataTypes.INTEGER(11),
+      allowNull: true,
+      references: {
+        model: 'supervisao',
+        key: 'id'
+      }
     }
   }, {
     tableName: 'agencia'
   });
+
+  Agencia.associate = models => {
+    Agencia.belongsTo(models.Regional, {
+      foreignKey: 'regional_id'
+    })
+
+    Agencia.belongsTo(models.Supervisao, {
+      foreignKey: 'supervisao_id'
+    })
+  }
+
+  return Agencia
 };

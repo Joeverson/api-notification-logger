@@ -1,22 +1,42 @@
 /* jshint indent: 2 */
 
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('usuario_agencia', {
+  const Usuario_agencia = sequelize.define('usuario_agencia', {
     id: {
       type: DataTypes.INTEGER(11),
       allowNull: false,
       primaryKey: true,
       autoIncrement: true
     },
-    id_usuario: {
+    usuario_id: {
       type: DataTypes.INTEGER(11),
-      allowNull: true
+      allowNull: true,
+      references: {
+        model: 'usuario',
+        key: 'id'
+      }
     },
-    id_agencia: {
+    agencia_id: {
       type: DataTypes.INTEGER(11),
-      allowNull: true
+      allowNull: true,
+      references: {
+        model: 'agencia',
+        key: 'id'
+      }
     }
   }, {
     tableName: 'usuario_agencia'
   });
+
+  Usuario_agencia.associate = models => {
+    Usuario_agencia.belongsTo(models.Usuario, {
+      foreignKey: 'usuario_id'
+    })
+
+    Usuario_agencia.belongsTo(models.Agencia, {
+      foreignKey: 'agencia_id'
+    })
+  }
+
+  return Usuario_agencia
 };
