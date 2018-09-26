@@ -3,7 +3,7 @@ import statement from '../db/connection'
 import jwt from 'jsonwebtoken'
 import freeRoutes from '../utils/routes/freeRoutes'
 
-export default async (req, res, next) => {
+export default async (req, res, next) => {  
   try {
     if (_.isEmpty(freeRoutes.filter(path => path === req.path))) {
       const model = await statement
@@ -23,8 +23,9 @@ export default async (req, res, next) => {
             })
           }
 
-          const user = await model.User.findById(decoded.id)
-          req.body.user = user
+          const user = await model.Usuario.findById(decoded.id)
+          user.role = decoded.role
+          req.decoded = user
         })
       }
     }
