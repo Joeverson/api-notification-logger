@@ -7,8 +7,10 @@ export default async (req, res, next) => {
   try {
     if (_.isEmpty(freeRoutes.filter(path => path === req.path))) {
       const model = await statement
-      const token = req.headers['x-access-token']
+      const token = req.query['x-access-token']
 
+      delete req.query['x-access-token']
+      
       if (_.isUndefined(token)) {
         res.status(401).send({
           auth: false,

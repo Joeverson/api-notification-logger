@@ -36,6 +36,20 @@ App.route('/')
   
 
 App.route('/:id')
+  .get(async (req, res) => {    
+    const context = new Context()
+    
+    try{
+      const cliente = await Cliente.find(req.params.id)
+      context.data = cliente
+      context.status.success = true
+    } catch (err) {      
+      context.status.details = err
+      context.status.success = false
+    } finally {
+      res.send(context)
+    }
+  })
   .put(async (req, res) => {    
     const context = new Context()
     

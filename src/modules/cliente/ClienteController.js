@@ -50,6 +50,18 @@ export default {
     return cliente
   },
   /**
+   * find byid
+   * @param {Integer} id 
+   */
+  async find(id) {
+    const models = await dbConnection
+
+    const cliente = await models.Cliente.findById(id)
+
+    // retornar dados inseridos
+    return cliente
+  },
+  /**
    * Metodo responsavel para poder 
    * deletar um cliente pelo id
    * 
