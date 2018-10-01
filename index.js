@@ -2,7 +2,6 @@ import Express from 'express'
 import Http from 'http'
 import core from './src/core'
 import bodyParser from 'body-parser'
-import cors from 'cors'
 
 /**
  *

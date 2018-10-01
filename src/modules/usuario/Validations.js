@@ -60,7 +60,8 @@ export default {
           where: {
             id: db.sequelize.col('usuario.tipo_user_id')
           }
-        }]
+        }],
+        raw: true
       })
 
       if (user == null || !password.check(data.senha, user.senha)) {

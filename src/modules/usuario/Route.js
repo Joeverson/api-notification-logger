@@ -13,7 +13,7 @@ App.route('/login')
   .post(async (req, res) => {
     const context = new Context()
 
-    try {
+    try {      
       const userToken = await User.autenticate(req.body)
 
       context.data = userToken

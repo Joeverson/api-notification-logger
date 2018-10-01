@@ -5,6 +5,8 @@ import {
 } from '../utils/constants'
 import directory from '../utils/directory'
 
+import migrationSequence from './migrations/migration.json'
+
 /**
  * pegando as informações do arquivo .env
  * e as registrando
@@ -34,30 +36,17 @@ export const db = {
    * processamento dos modelos e associações
    */
   async statement () {
-    const schemaDB = {
-      User: {},
-      User_types: {}
-    }
-
-    /**
-     * varrendo todos os arquivos de modelos
-     * para geralos automaticamente
-     */
-    const files = await directory.readDir(URI_DB_MODELS)
-    // invertendo a lista de arquivos, pois ele é listado por ordem de criação
-    files.sort((a, b) => {
-      return a < b
-    })
+    const schemaDB = {}
     /**
      * fazendo o import de todos os models
      * da aplicação e as colocando no esquema
      * de dados
      */
-
-    files.forEach(file => {
-      schemaDB[file.split('.')[0].replace(/^\w/, c => c.toUpperCase())] = (this.instance.import(`${__dirname}/models/${file}`))
+    
+    migrationSequence.forEach(file => {
+      schemaDB[file.replace(/^\w/, c => c.toUpperCase())] = (this.instance.import(`${__dirname}/models/${file}`))
     })
-
+    
     /**
      * fazendo a associção das tabelas
      * no esquema de dados do ORM
@@ -90,7 +79,7 @@ export const db = {
    * zera tudo e cria novamente
    */
   loadForce () {
-    this.instance.sync({force: true})
+    // this.instance.sync({force: true})
     return this
   }
 }
