@@ -8,6 +8,25 @@ App.route('/')
   .get(async (req, res) => {    
     res.send(await User.get())
   })
+  /**
+   * update the current user
+   */
+  .put(async (req, res) => {
+    const context = new Context()
+
+    try {
+      console.log('asdasd--> passou?');
+
+      // const usuario = await Usuario.update(req.params.id, req.body)
+      context.data = usuario
+      context.status.success = true
+    } catch (err) {
+      context.status.details = err
+      context.status.success = false
+    } finally {
+      res.send(context)
+    }
+  })
 
 App.route('/login')
   .post(async (req, res) => {
