@@ -8,6 +8,8 @@ export default async (req, res, next) => {
     if (_.isEmpty(freeRoutes.filter(path => path === req.path))) {
       const model = await statement
       const token = req.headers['x-access-token']
+      console.log(req.headers);
+      
 
       if (_.isUndefined(token)) {
         res.status(401).send({

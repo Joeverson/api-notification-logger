@@ -6,7 +6,7 @@ import userValidations from './Validations'
 import jwt from 'jsonwebtoken'
 
 export default {
-  async autenticate(data) {
+  async autenticate (data) {
     /**
      * essa validaçaõ valida e retorna caso tenha um usuario
      */
@@ -14,7 +14,7 @@ export default {
 
     const token = jwt.sign({
       id: user.id,
-      role: user.tipo_user.name
+      role: user.tipo_user.tipo
     }, process.env.SECRET_KEY, {
       expiresIn: 86400 // expires in 24 hours
     })
@@ -29,7 +29,7 @@ export default {
    * metodo responsavel por regitrar novos
    * usuarios no sistema
    */
-  async register(data) {
+  async register (data) {
     const model = await dbConnection
 
     // validations here

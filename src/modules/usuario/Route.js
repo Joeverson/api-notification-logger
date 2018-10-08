@@ -17,14 +17,13 @@ App.route('/login')
       const userToken = await User.autenticate(req.body)
 
       context.data = userToken
-      context.status.success = true 
+      context.status.success = true
     } catch (err) {
       context.status.success = false
       context.status.details = err
     } finally {
       res.send(context)
     }
-    
   })
 
 App.route('/register')
@@ -35,7 +34,7 @@ App.route('/register')
       const user = await User.register(req.body)
 
       context.data = user
-      context.status.success = true      
+      context.status.success = true
     } catch (err) {
       context.status.success = false
       context.status.details = err
