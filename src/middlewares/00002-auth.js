@@ -12,14 +12,14 @@ export default async (req, res, next) => {
       
 
       if (_.isUndefined(token)) {
-        res.status(401).send({
+        return res.status(401).send({
           auth: false,
           message: 'No token provider!'
         })
       } else {
         jwt.verify(token, process.env.SECRET_KEY, async (err, decoded) => {
           if (err) {
-            res.status(500).send({
+            return res.status(500).send({
               auth: false,
               message: 'Failed to authenticate token.'
             })
