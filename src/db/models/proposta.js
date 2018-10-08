@@ -70,7 +70,7 @@ module.exports = function(sequelize, DataTypes) {
     })
 
     Proposta.belongsTo(models.Status, {
-      foreignKey: 'Status_id'
+      foreignKey: 'status_id'
     })
   }
 

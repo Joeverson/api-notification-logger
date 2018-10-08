@@ -47,34 +47,37 @@ export default {
   },
 
   /** validando se o usuario existe no sistema */
-  async exists (data) {
+  async exists(data) {
     const db = await dbConnection
-    
-    const user = await db.Usuario.findOne({
-      where: {
-        email: data.email
-      },
-      include: [{
-        model: db.Tipo_user,
+
+    try {
+      const user = await db.Usuario.findOne({
         where: {
-          id: db.sequelize.col('usuario.tipo_user_id')
-        }
-      }],
-      raw: true
-    })
-
-    if (user == null || !password.check(data.senha, user.senha)) {
-      throw new ValidationException({
-        message: ERRORS.USER_NOT_FOUND
+          email: data.email
+        },
+        include: [{
+          model: db.Tipo_user,
+          where: {
+            id: db.sequelize.col('usuario.tipo_user_id')
+          }
+        }],
+        raw: true
       })
+
+      if (user == null || !password.check(data.senha, user.senha)) {
+        throw new ValidationException({
+          message: ERRORS.USER_NOT_FOUND
+        })
+      }
+
+      return user
+    } catch (err) {
+      throw err
     }
-
-    return user
   },
-
   /**
    * Método responsavel por verificar se um email eiste no banco de dados
-   *
+   * 
    * @param {String} email
    */
   async notExistsEmail(email) {

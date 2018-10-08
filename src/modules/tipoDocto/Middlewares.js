@@ -4,6 +4,7 @@
  * antes de ezecutar a arota
  * 
  */
-export default (req, res, next) => {  
+export default (req, res, next) => {
+  
   next()
 }

@@ -11,14 +11,14 @@ export default {
      * essa validaçaõ valida e retorna caso tenha um usuario
      */
     const user = await userValidations.exists(data)
-
+    
     const token = jwt.sign({
       id: user.id,
-      role: user.tipo_user.tipo
+      role: user['tipo_user.tipo']
     }, process.env.SECRET_KEY, {
       expiresIn: 86400 // expires in 24 hours
     })
-
+    
     return {
       token,
       user

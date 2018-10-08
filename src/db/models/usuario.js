@@ -21,7 +21,7 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: true
     },
     senha: {
-      type: DataTypes.STRING(15),
+      type: DataTypes.STRING(150),
       allowNull: true
     },
     data_nascimento: {
@@ -32,7 +32,7 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.INTEGER(11),
       allowNull: true,
       references: {
-        model: 'Tipo_user',
+        model: 'tipo_user',
         key: 'id'
       }
     },
@@ -48,7 +48,7 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.INTEGER(11),
       allowNull: true,
       references: {
-        model: 'Usuario',
+        model: 'usuario',
         key: 'id'
       }
     }

@@ -36,6 +36,20 @@ App.route('/')
   
 
 App.route('/:id')
+  .get(async (req, res) => {    
+    const context = new Context()
+    
+    try{
+      const cliente = await Cliente.find(req.params.id)
+      context.data = cliente
+      context.status.success = true
+    } catch (err) {      
+      context.status.details = err
+      context.status.success = false
+    } finally {
+      res.send(context)
+    }
+  })
   .put(async (req, res) => {    
     const context = new Context()
     
@@ -54,12 +68,17 @@ App.route('/:id')
     const context = new Context()
     
     try {
+      
       const cliente = await Cliente.delete(req.params.id)
-      context.data = cliente
-      context.status.success = true
+
+      if (context.data == 0) {
+        context.data = cliente
+        context.status.success = true
+      }
+      context.status.success = false
+      context.status.details.message = 'Problems in remove te client'
     } catch (err) {
       context.status.details = err
-      context.status.success = false
     } finally {
       res.send(context)
     }

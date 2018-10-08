@@ -37,6 +37,7 @@
     "expect.js": "^0.3.1",
     "express": "^4.16.3",
     "express-acl": "^2.0.3",
+    "express-cors": "0.0.3",
     "jsonwebtoken": "^8.3.0",
     "lodash": "^4.17.10",
     "mysql": "^2.16.0",
