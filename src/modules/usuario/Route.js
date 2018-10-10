@@ -5,34 +5,16 @@ import Context from '../../utils/context'
 const App = Express.Router()
 
 App.route('/')
-  .get(async (req, res) => {    
+  .get(async (req, res) => {
     res.send(await User.get())
   })
-  /**
-   * update the current user
-   */
-  .put(async (req, res) => {
-    const context = new Context()
 
-    try {
-      console.log('asdasd--> passou?');
-
-      // const usuario = await Usuario.update(req.params.id, req.body)
-      context.data = usuario
-      context.status.success = true
-    } catch (err) {
-      context.status.details = err
-      context.status.success = false
-    } finally {
-      res.send(context)
-    }
-  })
 
 App.route('/login')
   .post(async (req, res) => {
     const context = new Context()
 
-    try {      
+    try {
       const userToken = await User.autenticate(req.body)
 
       context.data = userToken
@@ -62,12 +44,43 @@ App.route('/register')
     }
   })
 
+App.route('/:id/clientes')
+  .get(async (req, res) => {
+    const context = new Context()
+
+    try {
+      const clientes = await User.getClients(req.params.id)
+      context.data = clientes
+      context.status.success = true
+    } catch (err) {
+      context.status.details = err
+      context.status.success = false
+    } finally {
+      res.send(context)
+    }
+  })
+
+
 App.route('/:id')
+  .get(async (req, res) => {
+    const context = new Context()
+
+    try {
+      const usuario = await User.findByid(req.params.id)
+      context.data = usuario
+      context.status.success = true
+    } catch (err) {
+      context.status.details = err
+      context.status.success = false
+    } finally {
+      res.send(context)
+    }
+  })
   .put(async (req, res) => {
     const context = new Context()
 
     try {
-      const usuario = await Usuario.update(req.params.id, req.body)
+      const usuario = await User.update(req.params.id, req.body)
       context.data = usuario
       context.status.success = true
     } catch (err) {
@@ -81,7 +94,7 @@ App.route('/:id')
     const context = new Context()
 
     try {
-      const usuario = await Usuario.delete(req.params.id)
+      const usuario = await User.delete(req.params.id)
       context.data = usuario
       context.status.success = true
     } catch (err) {
@@ -91,5 +104,6 @@ App.route('/:id')
       res.send(context)
     }
   })
+
 
 export default App

@@ -60,6 +60,12 @@ export default {
    */
   async update(id, data) {
     const models = await dbConnection
+    
+    // criptografando a senha.    
+    if (!!data.senha) {
+      data.senha = password.generate(data.senha)
+    }   
+     
 
     const usuario = await models.Usuario.update(
       data, {
@@ -73,6 +79,7 @@ export default {
     // retornar dados inseridos
     return usuario
   },
+  
   /**
    * Metodo responsavel para poder 
    * deletar um cliente pelo id
@@ -91,5 +98,39 @@ export default {
 
     // retornar dados inseridos
     return usuario
+  },
+
+  /**
+   * Metodo responsavel para poder 
+   * buscar um cliente pelo id
+   * 
+   * @param {int} id 
+   */
+  async findByid(id) {
+    const models = await dbConnection
+    const usuario = await models.Usuario.findById(id)
+
+    // retornar dados inseridos
+    return usuario
+  },
+
+  /**
+   * Buscando todos os clientes do usuario
+   * logado
+   * 
+   * @param {int} id 
+   */
+  async getClients(id) {
+    const models = await dbConnection
+
+    const clientes = await models.Cliente.findAll({
+      where: {
+        usuario_id: id
+      },
+      raw: true
+    })
+
+    // retornar dados inseridos
+    return clientes
   }
 }
