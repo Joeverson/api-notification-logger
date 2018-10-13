@@ -1,6 +1,6 @@
 import dbConnection from '../../db/connection'
 import ClientesValidations from './Validations'
-import ValidationException from '../../utils/exceptions/ValidationsExceptions';
+import validation from '../../utils/validations';
 
 
 export default {
@@ -14,6 +14,7 @@ export default {
   async add(data) {
     const models = await dbConnection
     // TODO - criar as validações para os dados de entrada do cliente
+    validation.not.null(data);        
 
     // adicionando o id do usuario que esta adicionando    
     const cliente = await models.Cliente.create(data)

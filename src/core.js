@@ -7,6 +7,8 @@ import format from './utils/format'
  * um todo.
  * 
  */
+const baseAPI = '/api/v1';
+
 export default {
   pathModules: `${__dirname}/modules`,
   pathMiddles: `${__dirname}/middlewares`,
@@ -35,10 +37,10 @@ export default {
           // caso tenha um middleware na pasta ele é carregado para a rota
           if (fs.existsSync(`${this.pathModules}/${path}/Middlewares.js`)) {
             import (`${this.pathModules}/${path}/Middlewares.js`).then((middle) => {
-              app.use(`/${format.adaptiveRouter(path)}`, middle.default, routes.default);
+              app.use(`${baseAPI}/${format.adaptiveRouter(path)}`, middle.default, routes.default);
             })
-          } else {
-            app.use(`/${format.adaptiveRouter(path)}`, routes.default);
+          } else {            
+            app.use(`${baseAPI}/${format.adaptiveRouter(path)}`, routes.default);
           }
         })
       })

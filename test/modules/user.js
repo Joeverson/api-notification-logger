@@ -1,5 +1,5 @@
 import expect from 'expect.js'
-import user from '../../src/modules/user/UserController'
+import user from '../../src/modules/usuario/UsuarioController'
 
 export default {
   start() {

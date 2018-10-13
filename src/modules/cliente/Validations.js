@@ -21,31 +21,7 @@ const ERRORS = {
 }
 
 export default {
-  /** não esta faltando dados obrigatodios */
-  isRequired(data) {
-    if (_.isUndefined(data)) {
-      throw new ValidationException({
-        message: ERRORS.EMPTY_DATA
-      })
-    } else if (_.isUndefined(data.nome)) {
-      throw new ValidationException({
-        message: ERRORS.NAME_NOT_FOUND
-      })
-    } else if (_.isUndefined(data.email)) {
-      throw new ValidationException({
-        message: ERRORS.EMAIL_NOT_FOUND
-      })
-    } else if (_.isUndefined(data.senha)) {
-      throw new ValidationException({
-        message: ERRORS.PASSWORD_NOT_FOUND
-      })
-    } else if (_.isUndefined(data.tipo_user_id)) {
-      throw new ValidationException({
-        message: ERRORS.TYPE_USER_NOT_FOUND
-      })
-    }
-  },
-
+  
   /**
    * verificando se existe um cliente por id
    * 

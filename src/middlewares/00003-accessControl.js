@@ -1,20 +1,21 @@
-// import acl from 'express-acl'
+import acl from 'express-acl'
 
-// const pathConfigAcessControl = `${__dirname}/../utils/routes/accessControl.json`
-
-// acl.config({
-//   filename: pathConfigAcessControl,
-//   path: '/',
-//   denyCallback: (res) => {
-//     return res.status(403).json({
-//       status: 'Access Denied',
-//       success: false,
-//       message: 'You are not authorized to access this resource'
-//     })
-//   }
-// })
+acl.config({
+  filename: 'accessControl.json',
+  path: 'src/utils/routes',
+  defaultRole: 'anonymous',
+  baseUrl: '/api/v1',
+  denyCallback: (res) => {
+    return res.status(403).json({
+      status: 'Access Denied',
+      success: false,
+      message: 'You are not authorized to access this resource'
+    })
+  }
+})
 
 // export default acl.authorize
+
 export default (req, res, next) => {
   next()
 }
