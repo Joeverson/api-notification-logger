@@ -7,6 +7,6 @@
  */
 
 export default [
-  '/usuario/login',
-  '/usuario/register'
+  'api/v1/usuario/login',
+  'api/v1/usuario/register'
 ]
