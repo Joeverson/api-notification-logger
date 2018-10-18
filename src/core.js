@@ -37,7 +37,7 @@ export default {
           // caso tenha um middleware na pasta ele é carregado para a rota
           if (fs.existsSync(`${this.pathModules}/${path}/Middlewares.js`)) {
             import (`${this.pathModules}/${path}/Middlewares.js`).then((middle) => {
-              app.use(`${baseAPI}/${format.adaptiveRouter(path)}`, middle.default, routes.default);
+              app.use(`${baseAPI}/${format.adaptiveRouter(path)}`, middle.default, routes.default);              
             })
           } else {            
             app.use(`${baseAPI}/${format.adaptiveRouter(path)}`, routes.default);
