@@ -16,7 +16,8 @@ export default {
     // TODO - criar as validações para os dados de entrada do cliente
     validation.not.null(data.nome, 'O nome deve ser preenchido');
     validation.not.null(data.cpf, 'Preencha o CPF');
-    validation.not.null(data.telefone1, 'Informe um telefone');
+    validation.not.null(data.data_nascimento, 'Informe a data de nascimento');    
+    data.cep = data.cep || null
     ClientesValidations.atLeastOnePhone([
       data.telefone1,
       data.telefone2,

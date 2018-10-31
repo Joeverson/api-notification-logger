@@ -56,8 +56,7 @@ export default {
     let atLeast = true;
     // se tiver pelo menos um valor que não seja vazio ele não da erro
     data.forEach(d => {
-      console.log(d);
-      if (d != null) {
+      if (!_.isEmpty(d)) {
         atLeast = false;
       }
     })
