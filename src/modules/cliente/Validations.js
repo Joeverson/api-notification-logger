@@ -21,11 +21,11 @@ const ERRORS = {
 }
 
 export default {
-  
+
   /**
    * verificando se existe um cliente por id
-   * 
-   * @param {int} id 
+   *
+   * @param {int} id
    */
   async exists(id) {
     const db = await dbConnection
@@ -43,5 +43,25 @@ export default {
     } catch (err) {
       throw err
     }
+  },
+
+  /**
+  * escolhendo pelo menos um telefone com base
+  * em um array de itens
+  *
+  * param {Array} data
+  * param {String} message
+  */
+  atLeastOnePhone(data, message){
+    let atLeast = true;
+    // se tiver pelo menos um valor que não seja vazio ele não da erro
+    data.forEach(d => {
+      console.log(d);
+      if (d != null) {
+        atLeast = false;
+      }
+    })
+
+    if (atLeast) throw new ValidationException({message: message || 'Preencha pelo menos um telefone.'})
   }
 }
