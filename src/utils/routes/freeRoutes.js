@@ -7,6 +7,5 @@
  */
 
 export default [
-  '/api/v1/usuario/login',
-  '/api/v1/usuario/register'
+  '/api/v1/log/:applicationName',
 ]

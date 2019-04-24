@@ -1,21 +1,16 @@
 import Express from 'express'
-import TipoDocto from './TipoDoctoController'
+import Log from './LogController'
 import Context from '../../utils/context'
 
 const App = Express.Router()
 
-App.route('/')
-  .get(async (req, res) => {    
-    res.send(await TipoDocto.list())
-  })  
-
-App.route('/:id')
-  .put(async (req, res) => {
+App.route('/:applicationName')
+  .get(async (req, res) => {
     const context = new Context()
 
-    try {
-      const tipoDocto = await TipoDocto.update(req.params.id, req.body)
-      context.data = tipoDocto
+    try{
+      const log = await Log.list(req.params.applicationName)
+      context.data = log
       context.status.success = true
     } catch (err) {
       context.status.details = err
@@ -24,14 +19,18 @@ App.route('/:id')
       res.send(context)
     }
   })
-  .delete(async (req, res) => {
+  .post(async (req, res) => {
     const context = new Context()
-
-    try {
-      const tipoDocto = await TipoDocto.delete(req.params.id)
-      context.data = tipoDocto
+    const app = {
+      applicationName: req.params.applicationName,
+      version: req.params.version
+    }
+    try{
+      const log = await Log.add(app, req.body)
+      context.data = log
       context.status.success = true
     } catch (err) {
+      console.log(err);
       context.status.details = err
       context.status.success = false
     } finally {

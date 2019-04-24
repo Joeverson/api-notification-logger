@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "nodemon --exec babel-node index.js",
     "migrations": "babel-node src/db/migrations/init.js ",
+    "seeds": "babel-node src/db/migrations/seeds.js ",
     "debug": "nodemon --exec babel-node index.js --inspect",
     "test": "mocha --compilers js:babel-core/register test/init.js",
     "db": "sequelize-auto -o \"./src/db/models\" -d microcredito -h localhost -u root -p 3306 -x dragonshit775{} -e mysql"

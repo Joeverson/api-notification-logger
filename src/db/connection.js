@@ -21,7 +21,7 @@ export const db = {
     dialect: process.env.DB_DIALECT,
     port: process.env.DB_PORT,
     define: {
-      timestamps: false // true by default
+      timestamps: true // true by default
     },
     pool: {
       max: 6,

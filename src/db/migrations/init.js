@@ -1,7 +1,6 @@
-import {mountDB} from '../connection'
+import { mountDB } from '../connection'
+import seeds from './seeds';
 
-mountDB.then( models => {
-  console.log(models)  
-
-  process.exit(0)
-})
+(async () => {
+  const models = await mountDB
+})();
